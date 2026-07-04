@@ -1,0 +1,32 @@
+---
+import { proofTiles } from '../data/site';
+---
+<section class="hero-proof-stage" data-proof-stage aria-labelledby="proof-stage-title">
+  <div class="stage-atmosphere" aria-hidden="true"></div>
+  <div class="stage-heading" id="proof-stage-title">Proof viewport</div>
+  <div class="proof-tiles" aria-label="SitesBuilder proof tiles">
+    {proofTiles.map((tile, index) => (
+      <article
+        class="proof-tile"
+        data-proof-tile={tile.id}
+        data-depth={tile.id}
+        style={`--tile-image: url('${tile.asset}'); --tile-accent: ${tile.accent};`}
+        tabindex="0"
+      >
+        <div>
+          <div class="tile-kicker">{tile.label}</div>
+          <h2>{tile.title}</h2>
+          <p>{tile.body}</p>
+        </div>
+        <div class="tile-bottom">
+          <a class="tile-link" href={tile.link} target={tile.link.startsWith('http') ? '_blank' : undefined} rel={tile.link.startsWith('http') ? 'noopener' : undefined}>{tile.id === 'center' ? 'See the flow' : 'Open live proof'}</a>
+          <span class="tile-index">{String(index + 1).padStart(2, '0')}</span>
+        </div>
+      </article>
+    ))}
+  </div>
+  <div class="mobile-step-controls" aria-label="Proof tile controls">
+    <button class="step-control" type="button" data-step-prev aria-label="Previous proof tile">‹</button>
+    <button class="step-control" type="button" data-step-next aria-label="Next proof tile">›</button>
+  </div>
+</section>

@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { routeMeta, whatsappHref, mailHref } from '../data/site';
+const meta = routeMeta.preview;
+---
+<BaseLayout title={meta.title} description={meta.description} canonicalPath={meta.path}>
+  <section class="page-hero preview-request">
+    <div class="section-inner split-feature">
+      <div>
+        <p class="eyebrow">Free preview request</p>
+        <h1>Get the first two sections before you commit.</h1>
+        <p class="section-lead">This is the exact starting point: send the details, then Local Web Works drafts a first-direction hero and proof section.</p>
+        <div class="section-actions"><a class="button-primary" href={whatsappHref} target="_blank" rel="noopener">Start on WhatsApp</a><a class="button-secondary" href={mailHref}>Start by email</a></div>
+      </div>
+      <aside class="panel preview-checklist" aria-label="Preview request checklist">
+        <h2>Include these details</h2>
+        <ul>
+          <li>Business name.</li>
+          <li>Current website or social page, if any.</li>
+          <li>What you sell and who it is for.</li>
+          <li>The main action you want visitors to take.</li>
+          <li>One or two reference sites if you have them.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+  <section class="section compact">
+    <div class="section-inner">
+      <h2>What happens next.</h2>
+      <div class="process-grid three">
+        <article class="panel"><h3>1. Confirm fit</h3><p>We check the business context and whether SitesBuilder is the right route.</p></article>
+        <article class="panel"><h3>2. Draft preview</h3><p>The first two landing-page sections are drafted as a real direction.</p></article>
+        <article class="panel"><h3>3. Continue or stop</h3><p>If it fits, choose a package and continue. If not, you are not locked into a full build.</p></article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

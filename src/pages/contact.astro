@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { routeMeta, whatsappHref, mailHref } from '../data/site';
+const meta = routeMeta.contact;
+---
+<BaseLayout title={meta.title} description={meta.description} canonicalPath={meta.path}>
+  <section class="page-hero">
+    <div class="section-inner">
+      <p class="eyebrow">Contact</p>
+      <h1>Send the business. See the first direction.</h1>
+      <p class="section-lead">Use WhatsApp for the fastest path, or email the same details if that is easier.</p>
+      <div class="section-actions"><a class="button-primary" href={whatsappHref} target="_blank" rel="noopener">WhatsApp SitesBuilder</a><a class="button-secondary" href={mailHref}>Email details</a></div>
+    </div>
+  </section>
+  <section class="section compact">
+    <div class="section-inner proof-grid">
+      <article class="panel"><h2>What to send</h2><ul><li>Business name and website if any.</li><li>Main service, product, or offer.</li><li>Main customer action: call, WhatsApp, booking, form, or purchase.</li><li>Any reference sites you like.</li></ul></article>
+      <article class="panel"><h2>Direct contacts</h2><p>Email: contact@sitesbuilder.store</p><p>WhatsApp: +65 91616337</p><p>Company: Local Web Works</p></article>
+    </div>
+  </section>
+</BaseLayout>

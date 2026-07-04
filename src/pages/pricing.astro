@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { routeMeta, packages } from '../data/site';
+const meta = routeMeta.pricing;
+---
+<BaseLayout title={meta.title} description={meta.description} canonicalPath={meta.path} schema={{
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'Is the SitesBuilder preview free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. SitesBuilder drafts the first two landing-page sections before the client commits to a paid full build.' } },
+    { '@type': 'Question', name: 'Is the preview a full free website?', acceptedAnswer: { '@type': 'Answer', text: 'No. The preview is a high-quality first direction: usually the hero and first proof section.' } }
+  ]
+}}>
+  <section class="page-hero">
+    <div class="section-inner">
+      <p class="eyebrow">Pricing</p>
+      <h1>Packages stay clear after the preview.</h1>
+      <p class="section-lead">Start with the free first-direction preview. Continue only if the structure, copy, and visual direction feel right.</p>
+    </div>
+  </section>
+  <section class="section compact">
+    <div class="section-inner">
+      <div class="pricing-grid">
+        {packages.map((pkg) => (
+          <article class="panel pricing-card">
+            <h2>{pkg.name}</h2>
+            <div class="price">{pkg.price}</div>
+            <p>{pkg.body}</p>
+            <ul>
+              <li>Preview-first direction before commitment.</li>
+              <li>Clean responsive sections and contact flow.</li>
+              <li>Real HTML copy and production-ready structure.</li>
+            </ul>
+            <a class="button-primary" href={pkg.href}>Start with this package</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section compact" id="faq">
+    <div class="section-inner">
+      <h2>Pricing questions.</h2>
+      <div class="proof-grid">
+        <article class="panel"><h3>Is the preview a full free website?</h3><p>No. It is a focused first direction: the hero and first proof section before the paid build.</p></article>
+        <article class="panel"><h3>When do I choose a package?</h3><p>After the preview direction is clear. The package depends on scope, content, and interaction depth.</p></article>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

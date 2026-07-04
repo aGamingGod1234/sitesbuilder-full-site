@@ -1,0 +1,56 @@
+---
+import '../styles/global.css';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+const {
+  title = 'SitesBuilder by Local Web Works',
+  description = 'Preview-first websites for local businesses.',
+  canonicalPath = '/',
+  withHeroScript = false,
+  schema = null
+} = Astro.props;
+
+const canonical = new URL(canonicalPath, 'https://sitesbuilder.store').toString();
+const defaultSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Local Web Works',
+  brand: 'SitesBuilder',
+  url: 'https://sitesbuilder.store',
+  email: 'contact@sitesbuilder.store',
+  telephone: '+6591616337',
+  areaServed: 'Singapore',
+  serviceType: 'Preview-first website design and redesign'
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://sitesbuilder.store/og-hero-en.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema || defaultSchema)}></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="site-shell">
+      <SiteNav />
+      <main id="main">
+        <slot />
+      </main>
+      <SiteFooter />
+    </div>
+    {withHeroScript && <script src="../scripts/hero.ts"></script>}
+  </body>
+</html>

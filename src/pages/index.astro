@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProofStage from '../components/ProofStage.astro';
+import { routeMeta, packages } from '../data/site';
+const meta = routeMeta.home;
+---
+<BaseLayout title={meta.title} description={meta.description} canonicalPath={meta.path} withHeroScript={true}>
+  <section id="top" class="hero" data-hero>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1 class="hero-title" data-hero-title>Preview first.<br />Build after.</h1>
+        <p class="hero-text" data-hero-copy>We draft the first two sections before you commit.</p>
+        <div class="hero-actions" aria-label="Hero actions">
+          <a class="button-primary" data-hero-action href="/free-preview/">Get my free preview</a>
+          <a class="button-secondary" data-hero-action href="/work/">View examples</a>
+        </div>
+      </div>
+      <ProofStage />
+    </div>
+  </section>
+
+  <section class="section" id="proof-intro">
+    <div class="section-inner">
+      <h2>Proof before pressure.</h2>
+      <p class="section-lead">SitesBuilder keeps the first decision simple: see the direction first, then decide whether to continue into a full paid build.</p>
+      <div class="proof-grid">
+        <a class="panel link-panel" href="https://eraspace.sg/" target="_blank" rel="noopener"><h3>Eraspace proof</h3><p>Retail ecommerce and product-discovery redesign context. Open the live site.</p></a>
+        <a class="panel link-panel" href="https://sarathyv2-web-production.up.railway.app/" target="_blank" rel="noopener"><h3>Sarathy proof</h3><p>Student finance MVP and landing flow shaped in four days. Open the live site.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="process-preview">
+    <div class="section-inner">
+      <h2>The preview is the sales mechanism.</h2>
+      <p class="section-lead">Instead of asking for trust up front, SitesBuilder shows the first two sections. The full build starts after the client approves the direction.</p>
+      <div class="process-grid">
+        <article class="panel"><h3>Request</h3><p>Send the business name, current link, and the action customers should take.</p></article>
+        <article class="panel"><h3>Draft</h3><p>We shape the hero and first proof section around the offer and customer path.</p></article>
+        <article class="panel"><h3>Approve</h3><p>You review the direction before choosing the package and full site scope.</p></article>
+        <article class="panel"><h3>Build</h3><p>Local Web Works finishes the site cleanly with pricing, proof, and contact paths.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pricing-preview">
+    <div class="section-inner">
+      <h2>Clear packages after the preview.</h2>
+      <p class="section-lead">The first step is still the free preview. Pricing stays clear so local businesses understand the likely investment before starting.</p>
+      <div class="pricing-grid">
+        {packages.map((pkg) => (
+          <a class="panel link-panel" href={pkg.href}>
+            <h3>{pkg.name}</h3>
+            <div class="price">{pkg.price}</div>
+            <p>{pkg.body}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { routeMeta } from '../data/site';
+const meta = routeMeta.process;
+---
+<BaseLayout title={meta.title} description={meta.description} canonicalPath={meta.path}>
+  <section class="page-hero">
+    <div class="section-inner">
+      <p class="eyebrow">Process</p>
+      <h1>Preview first, then build with direction.</h1>
+      <p class="section-lead">The workflow is designed to remove the usual uncertainty in website projects: you see the first direction before committing to the full build.</p>
+    </div>
+  </section>
+  <section class="section compact" id="preview-flow">
+    <div class="section-inner">
+      <div class="process-grid">
+        <article class="panel"><span class="step-number">01</span><h3>Send the business</h3><p>Business name, current site if any, target customer, and the main customer action.</p></article>
+        <article class="panel"><span class="step-number">02</span><h3>Shape the first two sections</h3><p>We draft the hero and first proof section as a real direction, not a moodboard.</p></article>
+        <article class="panel"><span class="step-number">03</span><h3>Review the direction</h3><p>You confirm whether the tone, structure, and offer feel right before paying for the full build.</p></article>
+        <article class="panel"><span class="step-number">04</span><h3>Finish the website</h3><p>Local Web Works expands the approved direction into a clean website with proof, pricing, and contact paths.</p></article>
+      </div>
+      <div class="section-actions"><a class="button-primary" href="/free-preview/">Start the preview</a><a class="button-secondary" href="/work/">See proof</a></div>
+    </div>
+  </section>
+</BaseLayout>

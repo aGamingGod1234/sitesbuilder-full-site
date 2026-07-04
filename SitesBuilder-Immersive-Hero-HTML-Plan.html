@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SitesBuilder Immersive Hero Implementation Plan</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #061017;
+      --panel: #0e1a24;
+      --panel-2: #142331;
+      --text: #eef8ff;
+      --muted: #9fb5c5;
+      --line: rgba(166, 229, 255, .18);
+      --cyan: #37d7ff;
+      --teal: #2fe6bf;
+      --blue: #4d7cff;
+      --soft: rgba(55, 215, 255, .10);
+      --radius: 28px;
+      --shadow: 0 30px 90px rgba(0, 0, 0, .45);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 80% 15%, rgba(77, 124, 255, .20), transparent 28rem),
+        radial-gradient(circle at 30% 85%, rgba(47, 230, 191, .14), transparent 32rem),
+        linear-gradient(180deg, #050b10 0%, var(--bg) 46%, #03070a 100%);
+    }
+
+    a { color: inherit; }
+    .wrap { width: min(1180px, calc(100vw - 40px)); margin: 0 auto; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(180deg, rgba(5, 11, 16, .86), rgba(5, 11, 16, .46));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .brand { display: grid; gap: 2px; font-weight: 760; letter-spacing: -0.03em; }
+    .brand small { color: var(--muted); font-weight: 500; letter-spacing: 0; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.045);
+      border-radius: 999px;
+      padding: 9px 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .cta {
+      color: #021016;
+      background: linear-gradient(135deg, var(--cyan), var(--teal));
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 10px 40px rgba(55,215,255,.24);
+    }
+    .ghost {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: 999px;
+      padding: 10px 16px;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .hero {
+      position: relative;
+      overflow: clip;
+      min-height: 96svh;
+      padding: clamp(42px, 8vw, 96px) 0 clamp(72px, 10vw, 140px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: clamp(44px, 8vw, 88px);
+    }
+    .hero-copy { max-width: 900px; }
+    .eyebrow { color: var(--teal); text-transform: uppercase; letter-spacing: .18em; font-size: 12px; font-weight: 800; }
+    h1 {
+      margin: 14px 0 16px;
+      font-size: clamp(58px, 11vw, 150px);
+      line-height: .86;
+      letter-spacing: -0.085em;
+      max-width: 9ch;
+    }
+    .lead { color: #c6d8e4; font-size: clamp(18px, 2vw, 24px); line-height: 1.45; max-width: 620px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+
+    .stage {
+      position: relative;
+      min-height: clamp(420px, 54svh, 720px);
+      border: 1px solid rgba(166,229,255,.16);
+      border-radius: clamp(28px, 4vw, 48px);
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.015)),
+        radial-gradient(circle at 72% 18%, rgba(55,215,255,.20), transparent 22rem),
+        radial-gradient(circle at 25% 80%, rgba(47,230,191,.12), transparent 25rem),
+        linear-gradient(135deg, rgba(10,22,31,.96), rgba(3,9,14,.98));
+      box-shadow: var(--shadow), inset 0 1px rgba(255,255,255,.10);
+      transform-style: preserve-3d;
+    }
+    .stage::before {
+      content: "";
+      position: absolute;
+      inset: auto -10% -28% -10%;
+      height: 52%;
+      background: radial-gradient(ellipse at center, rgba(55,215,255,.22), rgba(47,230,191,.08) 38%, transparent 68%);
+      filter: blur(28px);
+    }
+    .stage-label {
+      position: absolute;
+      left: clamp(18px, 3vw, 34px);
+      top: clamp(18px, 3vw, 34px);
+      z-index: 3;
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: var(--muted);
+      background: rgba(3,10,15,.52);
+      backdrop-filter: blur(16px);
+      font-size: 13px;
+    }
+    .orb {
+      width: 8px; height: 8px; border-radius: 999px; background: var(--teal); box-shadow: 0 0 24px var(--teal);
+    }
+    .proof-tiles {
+      position: absolute;
+      inset: 16% 5% 8%;
+      display: grid;
+      grid-template-columns: 1.05fr .9fr .95fr;
+      align-items: end;
+      gap: clamp(16px, 2.4vw, 34px);
+      perspective: 1200px;
+    }
+    .tile {
+      position: relative;
+      min-height: clamp(260px, 34vw, 440px);
+      padding: clamp(18px, 2.4vw, 32px);
+      border-radius: 30px;
+      border: 1px solid rgba(190,236,255,.18);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.035)),
+        linear-gradient(135deg, rgba(13,30,43,.92), rgba(6,14,20,.86));
+      box-shadow: 0 30px 80px rgba(0,0,0,.42), inset 0 1px rgba(255,255,255,.12);
+      overflow: hidden;
+    }
+    .tile:nth-child(1) { transform: translateY(28px) rotateY(10deg) rotateX(2deg); }
+    .tile:nth-child(2) { transform: translateY(-20px) scale(1.04); z-index: 2; }
+    .tile:nth-child(3) { transform: translateY(44px) rotateY(-10deg) rotateX(2deg); }
+    .tile::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(circle at 25% 20%, rgba(55,215,255,.18), transparent 12rem),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(255,255,255,.06) 1px, transparent 1px);
+      background-size: auto, 44px 44px, 44px 44px;
+      mask-image: linear-gradient(180deg, #000, transparent 80%);
+    }
+    .tile > * { position: relative; z-index: 1; }
+    .tile small { color: var(--teal); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .tile h3 { margin: 16px 0 10px; font-size: clamp(26px, 3vw, 44px); line-height: 1; letter-spacing: -.05em; }
+    .tile p { color: var(--muted); line-height: 1.5; max-width: 25ch; }
+    .tile-lines { display: grid; gap: 10px; margin-top: 30px; }
+    .line { height: 10px; border-radius: 999px; background: rgba(255,255,255,.08); overflow: hidden; }
+    .line span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--cyan), var(--teal)); opacity: .72; }
+
+    main section { padding: 84px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+    h2 { font-size: clamp(36px, 6vw, 76px); line-height: .95; letter-spacing: -.06em; margin: 0 0 24px; }
+    h3 { margin-top: 0; }
+    .section-lead { color: var(--muted); font-size: 19px; line-height: 1.55; max-width: 760px; }
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 34px; }
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.045);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 16px 50px rgba(0,0,0,.24);
+    }
+    .card p, li { color: var(--muted); line-height: 1.55; }
+    .tag { display: inline-flex; margin: 0 8px 8px 0; padding: 8px 11px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: rgba(255,255,255,.035); font-size: 13px; }
+    pre {
+      white-space: pre-wrap;
+      overflow: auto;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.28);
+      border-radius: 22px;
+      padding: 22px;
+      color: #cfe6f3;
+      line-height: 1.55;
+    }
+    table { width: 100%; border-collapse: collapse; margin-top: 24px; overflow: hidden; border-radius: 20px; border: 1px solid var(--line); }
+    th, td { text-align: left; padding: 14px; border-bottom: 1px solid rgba(255,255,255,.08); vertical-align: top; }
+    th { color: var(--text); background: rgba(255,255,255,.06); }
+    td { color: var(--muted); }
+    footer { padding: 50px 0; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      .pill.hide-small { display: none; }
+      .cards { grid-template-columns: 1fr; }
+      .proof-tiles { grid-template-columns: 1fr; inset: 20% 7% 7%; }
+      .tile { min-height: 220px; }
+      .tile:nth-child(n) { transform: none; }
+      .tile:nth-child(2), .tile:nth-child(3) { display: none; }
+      .stage { min-height: 460px; }
+    }
+
+    @media (max-width: 520px) {
+      .wrap { width: min(100vw - 24px, 1180px); }
+      .nav { height: 64px; }
+      .ghost { display: none; }
+      .hero { min-height: auto; padding-top: 36px; }
+      h1 { font-size: clamp(54px, 20vw, 92px); }
+      .lead { font-size: 17px; }
+      .stage { min-height: 390px; border-radius: 28px; }
+      .stage-label { font-size: 12px; }
+      .tile h3 { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">SitesBuilder <small>by Local Web Works</small></div>
+      <nav class="pill hide-small" aria-label="Plan sections">
+        <a href="#direction">Direction</a>
+        <a href="#tiles">Proof tiles</a>
+        <a href="#resolver">Viewport resolver</a>
+        <a href="#qa">QA</a>
+      </nav>
+      <a class="cta" href="#implementation">Implementation plan</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">HTML plan / implementation target</div>
+        <h1>Preview first.<br />Build after.</h1>
+        <p class="lead">A minimal, interactive SitesBuilder hero: oversized type, tiny CTA pair, and a cinematic lower proof-tile viewport that begins below the fold.</p>
+        <div class="actions">
+          <a class="cta" href="#tiles">Get my free preview</a>
+          <a class="ghost" href="#qa">View acceptance criteria</a>
+        </div>
+      </div>
+
+      <div class="stage" aria-label="Proof-tile viewport mockup">
+        <div class="stage-label"><span class="orb"></span> Lower interactive proof viewport</div>
+        <div class="proof-tiles">
+          <article class="tile">
+            <small>Eraspace</small>
+            <h3>Retail product discovery</h3>
+            <p>Heavy ecommerce redesign and product-flow work for a Singapore tech retail surface.</p>
+            <div class="tile-lines"><div class="line"><span style="width:74%"></span></div><div class="line"><span style="width:58%"></span></div><div class="line"><span style="width:86%"></span></div></div>
+          </article>
+          <article class="tile">
+            <small>Your preview</small>
+            <h3>First two sections</h3>
+            <p>Hero plus first proof section drafted before the client commits.</p>
+            <div class="tile-lines"><div class="line"><span style="width:88%"></span></div><div class="line"><span style="width:66%"></span></div><div class="line"><span style="width:79%"></span></div></div>
+          </article>
+          <article class="tile">
+            <small>Sarathy</small>
+            <h3>Student finance MVP</h3>
+            <p>Landing page and app flow shaped quickly for university-life finance.</p>
+            <div class="tile-lines"><div class="line"><span style="width:69%"></span></div><div class="line"><span style="width:82%"></span></div><div class="line"><span style="width:52%"></span></div></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section id="direction">
+      <div class="wrap">
+        <h2>Direction lock</h2>
+        <p class="section-lead">This is not a standard SaaS split hero. The approved pattern is sparse and experiential: floating nav, huge top-left statement, restrained CTA pair, and one large lower interactive viewport that carries the product proof.</p>
+        <div class="cards">
+          <article class="card"><h3>Use</h3><p>Minimal layout, strong negative space, proof tiles, scroll depth, viewport-aware composition, real HTML text.</p></article>
+          <article class="card"><h3>Avoid</h3><p>Dashboard mockups, browser-card grids, left-column/right-image split, fake metrics, generic agency sections, copied PeachWeb assets.</p></article>
+          <article class="card"><h3>Palette</h3><p>Graphite, smoked charcoal, cyan action, teal support, soft depth blue. Analogous cool harmony only.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="tiles">
+      <div class="wrap">
+        <h2>Proof-tile viewport</h2>
+        <p class="section-lead">The lower stage uses proof tiles as the core content metaphor. They must feel like layered objects in a cinematic preview space, not like normal dashboard cards.</p>
+        <div class="cards">
+          <article class="card"><h3>Eraspace tile</h3><p>Purpose: ecommerce / product-discovery redesign proof. Claim only verified work, no invented numbers.</p></article>
+          <article class="card"><h3>Sarathy tile</h3><p>Purpose: app/landing/MVP proof. Can mention the four-day build context because it is part of the approved project context.</p></article>
+          <article class="card"><h3>Preview-flow tile</h3><p>Purpose: make the free-preview offer visual — first two landing-page sections forming before commitment.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="resolver">
+      <div class="wrap">
+        <h2>Dynamic viewport resolver</h2>
+        <p class="section-lead">Responsiveness must respond to viewport shape, not only width. The implementation should read horizontal size, vertical size, aspect ratio, visual viewport height, and available space.</p>
+        <table>
+          <thead><tr><th>Mode</th><th>Trigger idea</th><th>Display behavior</th></tr></thead>
+          <tbody>
+            <tr><td>wide-desktop</td><td>Large width and landscape aspect</td><td>Huge lower viewport, three proof tiles in depth, full parallax.</td></tr>
+            <tr><td>portrait-desktop</td><td>Tall desktop or narrow aspect</td><td>Hero height capped; proof tiles stack 2+1; less empty space.</td></tr>
+            <tr><td>tablet</td><td>Medium width / mixed aspect</td><td>Compact nav; lower stage taller; reduced parallax.</td></tr>
+            <tr><td>mobile-tall</td><td>Small width with enough height</td><td>One featured proof tile; step/swipe affordance; CTA visible.</td></tr>
+            <tr><td>mobile-short</td><td>Small width and limited height</td><td>Compressed headline, reduced motion, proof stage peeks into view.</td></tr>
+          </tbody>
+        </table>
+        <pre><code>const root = document.documentElement;
+
+function resolveViewportMode() {
+  const vw = window.innerWidth;
+  const vh = window.visualViewport?.height || window.innerHeight;
+  const aspect = vw / Math.max(vh, 1);
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let mode = 'wide-desktop';
+  if (vw < 640 && vh < 680) mode = 'mobile-short';
+  else if (vw < 640) mode = 'mobile-tall';
+  else if (vw < 980) mode = 'tablet';
+  else if (aspect < 0.9 || vh > vw * 1.2) mode = 'portrait-desktop';
+
+  root.dataset.viewportMode = mode;
+  root.dataset.reducedMotion = reduced ? 'true' : 'false';
+  root.style.setProperty('--vw', `${vw}px`);
+  root.style.setProperty('--vh', `${vh}px`);
+  root.style.setProperty('--aspect', aspect.toFixed(3));
+}</code></pre>
+      </div>
+    </section>
+
+    <section id="motion">
+      <div class="wrap">
+        <h2>Motion plan</h2>
+        <p class="section-lead">GSAP motion should explain the product, not decorate every element. The opening sequence stages the story: brand, promise, CTA, then proof viewport.</p>
+        <div class="cards">
+          <article class="card"><h3>Opening</h3><p>Nav appears, headline settles, CTAs enter, lower proof stage rises into partial view.</p></article>
+          <article class="card"><h3>Scroll</h3><p>Proof tiles become the focus; depth and parallax are mode-specific and reduced on mobile.</p></article>
+          <article class="card"><h3>Reduced motion</h3><p>Disable parallax and long transitions; keep proof tiles readable and fully accessible.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="implementation">
+      <div class="wrap">
+        <h2>Implementation tasks</h2>
+        <p class="section-lead">Build in layers: static first, responsive resolver second, motion third, then proof polish and QA.</p>
+        <div class="cards">
+          <article class="card"><h3>1. Static hero</h3><p>Astro component with real text, nav, CTA, and lower proof-tile viewport. No animation dependency.</p></article>
+          <article class="card"><h3>2. Resolver</h3><p>Add viewport-shape detection and mode attributes. Drive CSS variables from measured dimensions.</p></article>
+          <article class="card"><h3>3. GSAP</h3><p>Add mode-specific hero reveal and scroll focus timelines. Rebuild safely on mode changes.</p></article>
+          <article class="card"><h3>4. Tile interaction</h3><p>Desktop hover/focus depth; mobile step controls; keyboard accessible proof navigation.</p></article>
+          <article class="card"><h3>5. QA</h3><p>Build, screenshot desktop/mobile, reduced motion, overflow check, social preview frame.</p></article>
+          <article class="card"><h3>6. Asset upgrade</h3><p>Only add Spline/R3F/Higgsfield textures if the HTML/CSS version lacks enough depth.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="qa">
+      <div class="wrap">
+        <h2>Acceptance criteria</h2>
+        <p class="section-lead">The implementation must pass visual and runtime checks. No claim of “premium” or “interactive” is accepted without screenshots and viewport evidence.</p>
+        <p>
+          <span class="tag">1440×900</span>
+          <span class="tag">1920×1080</span>
+          <span class="tag">900×1600</span>
+          <span class="tag">768×1024</span>
+          <span class="tag">390×844</span>
+          <span class="tag">360×640</span>
+          <span class="tag">1200×630 OG</span>
+        </p>
+        <div class="cards">
+          <article class="card"><h3>Visual</h3><p>Not a SaaS split, not dashboard cards, proof tiles are meaningful, top-left type remains strong.</p></article>
+          <article class="card"><h3>Responsive</h3><p>Distinct display modes by width, height, and aspect. No horizontal overflow.</p></article>
+          <article class="card"><h3>Functional</h3><p>CTA works, proof tiles accessible, reduced motion supported, build passes.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">SitesBuilder immersive hero implementation plan — staged for Local Web Works.</div>
+  </footer>
+</body>
+</html>

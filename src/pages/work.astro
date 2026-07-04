@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { routeMeta } from '../data/site';
+const meta = routeMeta.work;
+---
+<BaseLayout title={meta.title} description={meta.description} canonicalPath={meta.path}>
+  <section class="page-hero">
+    <div class="section-inner">
+      <p class="eyebrow">Work proof</p>
+      <h1>Examples that explain the offer.</h1>
+      <p class="section-lead">These are proof tiles, not inflated case studies. They show the kind of product thinking SitesBuilder brings into the first two preview sections.</p>
+    </div>
+  </section>
+  <section class="section compact" id="eraspace">
+    <div class="section-inner split-feature">
+      <div>
+        <p class="eyebrow">Eraspace</p>
+        <h2>Retail product discovery.</h2>
+        <p class="section-lead">Heavy ecommerce redesign and product-flow work for Singapore tech retail. The proof is about structure, product clarity, and customer movement.</p>
+        <div class="section-actions"><a class="button-primary" href="https://eraspace.sg/" target="_blank" rel="noopener">Open Eraspace live site</a></div>
+      </div>
+      <img class="proof-image" src="/assets/proof-eraspace.svg" alt="Eraspace retail product discovery proof surface" />
+    </div>
+  </section>
+  <section class="section compact" id="sarathy">
+    <div class="section-inner split-feature reverse">
+      <img class="proof-image" src="/assets/proof-sarathy.svg" alt="Sarathy student finance MVP proof surface" />
+      <div>
+        <p class="eyebrow">Sarathy</p>
+        <h2>Student finance MVP.</h2>
+        <p class="section-lead">Landing page and app flow shaped in four days for a Singapore university-life finance product. The claim stays narrow and concrete.</p>
+        <div class="section-actions"><a class="button-primary" href="https://sarathyv2-web-production.up.railway.app/" target="_blank" rel="noopener">Open Sarathy live site</a></div>
+      </div>
+    </div>
+  </section>
+  <section class="section compact" id="preview-proof">
+    <div class="section-inner">
+      <h2>What the preview proves.</h2>
+      <div class="process-grid three">
+        <article class="panel"><h3>Offer clarity</h3><p>The first screen says what the business sells and why the visitor should care.</p></article>
+        <article class="panel"><h3>Customer path</h3><p>The preview makes the next action obvious without cluttering the page.</p></article>
+        <article class="panel"><h3>Visual direction</h3><p>The brand gets a real direction, not a generic template promise.</p></article>
+      </div>
+      <div class="section-actions"><a class="button-primary" href="/free-preview/">Request your preview</a><a class="button-secondary" href="/pricing/">See pricing</a></div>
+    </div>
+  </section>
+</BaseLayout>

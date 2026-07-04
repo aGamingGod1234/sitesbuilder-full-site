@@ -1,0 +1,22 @@
+---
+import { navItems } from '../data/site';
+const path = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const isActive = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
+---
+<header class="nav-shell" data-hero-nav>
+  <div class="nav-inner" aria-label="Primary navigation">
+    <a class="brand-lockup" href="/" aria-label="SitesBuilder home">
+      <strong>SitesBuilder</strong>
+      <span>by Local Web Works</span>
+    </a>
+    <nav class="nav-links" aria-label="Main sections">
+      {navItems.map((item) => (
+        <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+    <div class="nav-actions">
+      <a class="button-secondary" href="/contact/">Talk to us</a>
+      <a class="button-primary" href="/free-preview/">Get my free preview</a>
+    </div>
+  </div>
+</header>

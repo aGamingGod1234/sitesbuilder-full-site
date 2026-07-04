@@ -1,0 +1,8 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "lib": ["DOM", "DOM.Iterable", "ES2020"],
+    "target": "ES2020"
+  }
+}
