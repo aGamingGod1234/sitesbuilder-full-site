@@ -1,22 +1,44 @@
 ---
 import { proofTiles, sectionAssets } from '../data/site';
+
+const heroCards = proofTiles.filter((tile) => tile.id !== 'center');
+const cardCode = {
+  left: [
+    'const project = await sitesBuilder.preview({',
+    "  client: 'Eraspace',",
+    "  section: 'moving hero',",
+    "  mode: 'live-commerce-proof',",
+    "  motion: '5s clip pending'",
+    '});'
+  ],
+  right: [
+    'function buildFromScratch(site) {',
+    "  site.hero.reveal('source-code');",
+    "  site.sections.customize('full-control');",
+    "  return deploy(site, 'production');",
+    '}'
+  ]
+};
 ---
 <div class="hero-stage" data-proof-stage>
   <img class="stage-bg" src={sectionAssets.heroAlt} alt="" loading="eager" decoding="async" />
   <div class="stage-shell">
     <div class="stage-topline">
-      <span>Proof viewport</span>
-      <small>Swipe or tab through live proof</small>
+      <span>Live proof cards</span>
+      <small>Hover a card to peel back the site and reveal the code behind it.</small>
     </div>
-    <div class="tile-deck" aria-label="SitesBuilder proof tiles">
-      {proofTiles.map((tile, index) => (
-        <article class={`proof-tile tile-${tile.id}`} data-proof-tile={tile.id} tabindex={index === 1 ? 0 : -1} style={`--tile-accent:${tile.accent}`}>
-          <a href={tile.link} target={tile.link.startsWith('http') ? '_blank' : undefined} rel={tile.link.startsWith('http') ? 'noopener' : undefined} aria-label={`${tile.title}: ${tile.label}`}>
-            <img src={tile.image} alt="" loading={index === 1 ? 'eager' : 'lazy'} decoding="async" />
-            <div class="tile-glass">
-              <span>{tile.label}</span>
-              <h3>{tile.title}</h3>
-              <p>{tile.body}</p>
+    <div class="tile-deck two-card-deck" aria-label="SitesBuilder live proof cards">
+      {heroCards.map((tile, index) => (
+        <article class={`proof-tile hero-proof-card tile-${tile.id}`} data-proof-tile={tile.id} tabindex={index === 0 ? 0 : -1} style={`--tile-accent:${tile.accent}`}>
+          <a href={tile.link} target="_blank" rel="noopener" aria-label={`${tile.title}: ${tile.label}`}>
+            <pre class="hero-code-layer" aria-hidden="true"><code>{(cardCode[tile.id as 'left' | 'right'] || cardCode.right).join('\n')}</code></pre>
+            <div class="hero-tile-media">
+              <img src={tile.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+              <div class="tile-glass">
+                <span>{tile.label}</span>
+                <h3>{tile.title}</h3>
+                <p>{tile.id === 'left' ? 'Screenshot placeholder now. Five-second moving hero clip drops in later.' : 'Screenshot placeholder now. Hover to see the custom code layer behind the build.'}</p>
+              </div>
             </div>
           </a>
         </article>

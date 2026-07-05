@@ -8,7 +8,7 @@ type ViewportMode = 'wide-desktop' | 'portrait-desktop' | 'tablet' | 'mobile-tal
 const root = document.documentElement;
 const mobileModes = new Set<ViewportMode>(['mobile-tall', 'mobile-short']);
 let mode: ViewportMode = 'wide-desktop';
-let activeTile = 1;
+let activeTile = 0;
 let timelineContext: gsap.Context | null = null;
 let resizeTimer = 0;
 
@@ -90,9 +90,10 @@ function rebuildMotion() {
         }
       });
 
-      gsap.to('[data-proof-tile="center"]', {
-        y: mode === 'portrait-desktop' ? -34 : -78,
+      gsap.to('.hero-proof-card', {
+        y: mode === 'portrait-desktop' ? -26 : -48,
         ease: 'none',
+        stagger: .04,
         scrollTrigger: {
           trigger: hero,
           start: '35% top',
@@ -102,6 +103,16 @@ function rebuildMotion() {
       });
     }
   }, document.body);
+}
+
+function wireHeroCodeReveal() {
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.hero-proof-card'));
+  cards.forEach((card) => {
+    card.addEventListener('pointerenter', () => card.classList.add('is-code-revealed'));
+    card.addEventListener('pointerleave', () => card.classList.remove('is-code-revealed'));
+    card.addEventListener('focusin', () => card.classList.add('is-code-revealed'));
+    card.addEventListener('focusout', () => card.classList.remove('is-code-revealed'));
+  });
 }
 
 function wireTileControls() {
@@ -165,6 +176,7 @@ function wireSectionReveals() {
 }
 
 applyViewportMode();
+wireHeroCodeReveal();
 wireTileControls();
 wireResize();
 wireSectionReveals();

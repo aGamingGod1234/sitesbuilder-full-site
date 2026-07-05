@@ -1,8 +1,24 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProofStage from '../components/ProofStage.astro';
-import { routeMeta, packages, proofTiles, processSteps, sectionAssets, whatsappHref } from '../data/site';
+import { routeMeta, packages, processSteps, sectionAssets, whatsappHref } from '../data/site';
 const meta = routeMeta.home;
+const leftCode = `const site = createWebsite({
+  canvas: 'blank',
+  sections: ['hero', 'proof', 'contact'],
+  background: nanoBananaPro.scene(),
+  editable: true
+});
+
+site.hero.mount(liveProofCards);
+site.motion.add('glitch-into-place');`;
+const rightCode = `export function customize(flow) {
+  return flow
+    .replaceCopy(client.voice)
+    .swapAssets(client.proof)
+    .tuneMotion('cursor', 'scroll', 'hover')
+    .shipToProduction();
+}`;
 ---
 <BaseLayout title={meta.title} description={meta.description} canonicalPath={meta.path} withHeroScript={true}>
   <section id="top" class="scene hero-scene" data-hero>
@@ -22,23 +38,18 @@ const meta = routeMeta.home;
     </div>
   </section>
 
-  <section class="scene section-scene proof-scene" id="proof-intro" data-motion-section>
+  <section class="scene section-scene code-craft-scene" id="code-craft" data-motion-section>
     <img class="scene-bg" src={sectionAssets.proof} alt="" loading="lazy" decoding="async" />
-    <div class="section-inner proof-layout">
-      <div class="section-copy">
-        <p class="microcopy">Designated proof section</p>
-        <h2>Live sites, framed as proof tiles.</h2>
-        <p>Not fake metrics. Not pretend product panels. The tiles open real work so the preview promise has weight.</p>
+    <div class="section-inner code-craft-layout">
+      <pre class="code-pane code-pane-left" aria-hidden="true"><code>{leftCode}</code></pre>
+
+      <div class="section-copy code-craft-copy">
+        <p class="microcopy">Built from source</p>
+        <h2 class="glitch-heading"><span class="glitch-visible">Glitches into place.</span><span class="glitch-shadow glitch-shadow-a" aria-hidden="true">Glitches into place.</span><span class="glitch-shadow glitch-shadow-b" aria-hidden="true">Glitches into place.</span></h2>
+        <p>We use code to create every section from scratch, so the website is fully customizable instead of trapped inside a template.</p>
       </div>
-      <div class="live-proof-grid">
-        {proofTiles.filter((tile) => tile.link.startsWith('http')).map((tile) => (
-          <a class="live-proof-card" href={tile.link} target="_blank" rel="noopener">
-            <img src={tile.image} alt={`${tile.label} live hero screenshot`} loading="lazy" decoding="async" />
-            <span>{tile.label}</span>
-            <strong>{tile.title}</strong>
-          </a>
-        ))}
-      </div>
+
+      <pre class="code-pane code-pane-right" aria-hidden="true"><code>{rightCode}</code></pre>
     </div>
   </section>
 
