@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { siteUrl } from '../data/site';
 
 const {
   title = 'SitesBuilder by Local Web Works',
@@ -11,20 +12,19 @@ const {
   schema = null
 } = Astro.props;
 
-const canonical = new URL(canonicalPath, 'https://sitesbuilder.store').toString();
+const canonical = new URL(canonicalPath, siteUrl).toString();
 const defaultSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
   name: 'Local Web Works',
   brand: 'SitesBuilder',
-  url: 'https://sitesbuilder.store',
+  url: siteUrl,
   email: 'contact@sitesbuilder.store',
   telephone: '+6591616337',
   areaServed: 'Singapore',
   serviceType: 'Preview-first website design and redesign'
 };
 ---
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -38,7 +38,7 @@ const defaultSchema = {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content="https://sitesbuilder.store/og-hero-en.png" />
+    <meta property="og:image" content={`${siteUrl}/og-hero-en.png`} />
     <meta name="twitter:card" content="summary_large_image" />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema || defaultSchema)}></script>
   </head>

@@ -76,7 +76,7 @@ function rebuildMotion() {
       .from('[data-hero-copy]', { y: 18, autoAlpha: 0, duration: .62 }, .20)
       .from('[data-hero-action]', { y: 16, autoAlpha: 0, duration: .5, stagger: .08 }, .30)
       .from('[data-proof-stage]', { y: mobileModes.has(mode) ? 24 : 46, autoAlpha: 0, duration: .92 }, .34)
-      .from('[data-proof-tile]', { y: mobileModes.has(mode) ? 18 : 54, autoAlpha: 0, rotateX: mobileModes.has(mode) ? 0 : 5, duration: .82, stagger: .08 }, .52);
+      .from('[data-proof-tile]', { y: mobileModes.has(mode) ? 18 : 54, rotateX: mobileModes.has(mode) ? 0 : 5, duration: .82, stagger: .08 }, .52);
 
     if (!mobileModes.has(mode)) {
       gsap.to('[data-proof-stage]', {
@@ -144,7 +144,28 @@ function wireResize() {
   new ResizeObserver(schedule).observe(document.body);
 }
 
+function wireSectionReveals() {
+  const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-motion-section]'));
+  if (!sections.length) return;
+
+  if (root.dataset.reducedMotion === 'true') {
+    sections.forEach((section) => section.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.16, rootMargin: '0px 0px -10% 0px' });
+
+  sections.forEach((section) => observer.observe(section));
+}
+
 applyViewportMode();
 wireTileControls();
 wireResize();
+wireSectionReveals();
 rebuildMotion();

@@ -1,13 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProofStage from '../components/ProofStage.astro';
-import { routeMeta, packages } from '../data/site';
+import { routeMeta, packages, proofTiles, processSteps, sectionAssets, whatsappHref } from '../data/site';
 const meta = routeMeta.home;
 ---
 <BaseLayout title={meta.title} description={meta.description} canonicalPath={meta.path} withHeroScript={true}>
-  <section id="top" class="hero" data-hero>
+  <section id="top" class="scene hero-scene" data-hero>
+    <img class="scene-bg" src={sectionAssets.hero} alt="" loading="eager" decoding="async" />
+    <div class="scene-vignette"></div>
     <div class="hero-inner">
       <div class="hero-copy">
+        <p class="microcopy">Free preview: first two sections only</p>
         <h1 class="hero-title" data-hero-title>Preview first.<br />Build after.</h1>
         <p class="hero-text" data-hero-copy>We draft the first two sections before you commit.</p>
         <div class="hero-actions" aria-label="Hero actions">
@@ -19,42 +22,85 @@ const meta = routeMeta.home;
     </div>
   </section>
 
-  <section class="section" id="proof-intro">
-    <div class="section-inner">
-      <h2>Proof before pressure.</h2>
-      <p class="section-lead">SitesBuilder keeps the first decision simple: see the direction first, then decide whether to continue into a full paid build.</p>
-      <div class="proof-grid">
-        <a class="panel link-panel" href="https://eraspace.sg/" target="_blank" rel="noopener"><h3>Eraspace proof</h3><p>Retail ecommerce and product-discovery redesign context. Open the live site.</p></a>
-        <a class="panel link-panel" href="https://sarathyv2-web-production.up.railway.app/" target="_blank" rel="noopener"><h3>Sarathy proof</h3><p>Student finance MVP and landing flow shaped in four days. Open the live site.</p></a>
+  <section class="scene section-scene proof-scene" id="proof-intro" data-motion-section>
+    <img class="scene-bg" src={sectionAssets.proof} alt="" loading="lazy" decoding="async" />
+    <div class="section-inner proof-layout">
+      <div class="section-copy">
+        <p class="microcopy">Designated proof section</p>
+        <h2>Live sites, framed as proof tiles.</h2>
+        <p>Not fake metrics. Not pretend product panels. The tiles open real work so the preview promise has weight.</p>
+      </div>
+      <div class="live-proof-grid">
+        {proofTiles.filter((tile) => tile.link.startsWith('http')).map((tile) => (
+          <a class="live-proof-card" href={tile.link} target="_blank" rel="noopener">
+            <img src={tile.image} alt={`${tile.label} live hero screenshot`} loading="lazy" decoding="async" />
+            <span>{tile.label}</span>
+            <strong>{tile.title}</strong>
+          </a>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="section" id="process-preview">
-    <div class="section-inner">
-      <h2>The preview is the sales mechanism.</h2>
-      <p class="section-lead">Instead of asking for trust up front, SitesBuilder shows the first two sections. The full build starts after the client approves the direction.</p>
-      <div class="process-grid">
-        <article class="panel"><h3>Request</h3><p>Send the business name, current link, and the action customers should take.</p></article>
-        <article class="panel"><h3>Draft</h3><p>We shape the hero and first proof section around the offer and customer path.</p></article>
-        <article class="panel"><h3>Approve</h3><p>You review the direction before choosing the package and full site scope.</p></article>
-        <article class="panel"><h3>Build</h3><p>Local Web Works finishes the site cleanly with pricing, proof, and contact paths.</p></article>
+  <section class="scene section-scene assembly-scene" id="preview-flow" data-motion-section>
+    <img class="scene-bg" src={sectionAssets.process} alt="" loading="lazy" decoding="async" />
+    <div class="section-inner assembly-layout">
+      <div class="assembly-visual" aria-hidden="true">
+        <div class="section-plate hero-plate"><span>01</span><strong>Hero direction</strong></div>
+        <div class="section-plate proof-plate"><span>02</span><strong>First proof section</strong></div>
+        <div class="contract-line"><span>Contract starts after approval</span></div>
+      </div>
+      <div class="section-copy narrow">
+        <p class="microcopy">Preview mechanism</p>
+        <h2>The offer is visual before it is verbal.</h2>
+        <p>The preview shows the opening scene and the first proof section. If it feels right, Local Web Works completes the full website.</p>
+        <a class="button-primary" href="/process/">See the process</a>
       </div>
     </div>
   </section>
 
-  <section class="section" id="pricing-preview">
+  <section class="scene section-scene process-strip" data-motion-section>
+    <img class="scene-bg" src={sectionAssets.processAlt} alt="" loading="lazy" decoding="async" />
     <div class="section-inner">
-      <h2>Clear packages after the preview.</h2>
-      <p class="section-lead">The first step is still the free preview. Pricing stays clear so local businesses understand the likely investment before starting.</p>
-      <div class="pricing-grid">
+      <div class="process-lane">
+        {processSteps.map(([label, body]) => (
+          <article class="process-node">
+            <span>{label}</span>
+            <p>{body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="scene section-scene pricing-scene" id="pricing-preview" data-motion-section>
+    <img class="scene-bg" src={sectionAssets.pricing} alt="" loading="lazy" decoding="async" />
+    <div class="section-inner pricing-layout">
+      <div class="section-copy">
+        <p class="microcopy">Packages after preview</p>
+        <h2>Clear next steps, no pressure up front.</h2>
+        <p>The free preview comes first. Pricing anchors stay visible so local businesses understand the likely path.</p>
+      </div>
+      <div class="pricing-deck">
         {packages.map((pkg) => (
-          <a class="panel link-panel" href={pkg.href}>
-            <h3>{pkg.name}</h3>
-            <div class="price">{pkg.price}</div>
+          <a class="price-card" href={pkg.href}>
+            <span>{pkg.name}</span>
+            <strong>{pkg.price}</strong>
             <p>{pkg.body}</p>
           </a>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="scene final-scene" data-motion-section>
+    <img class="scene-bg" src={sectionAssets.conversion} alt="" loading="lazy" decoding="async" />
+    <div class="final-card">
+      <p class="microcopy">Start with the first two sections</p>
+      <h2>Send the business. We draft the opening.</h2>
+      <div class="hero-actions center-actions">
+        <a class="button-primary" href="/free-preview/">Get my free preview</a>
+        <a class="button-secondary" href={whatsappHref} target="_blank" rel="noopener">WhatsApp us</a>
       </div>
     </div>
   </section>

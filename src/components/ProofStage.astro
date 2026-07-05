@@ -1,32 +1,30 @@
 ---
-import { proofTiles } from '../data/site';
+import { proofTiles, sectionAssets } from '../data/site';
 ---
-<section class="hero-proof-stage" data-proof-stage aria-labelledby="proof-stage-title">
-  <div class="stage-atmosphere" aria-hidden="true"></div>
-  <div class="stage-heading" id="proof-stage-title">Proof viewport</div>
-  <div class="proof-tiles" aria-label="SitesBuilder proof tiles">
-    {proofTiles.map((tile, index) => (
-      <article
-        class="proof-tile"
-        data-proof-tile={tile.id}
-        data-depth={tile.id}
-        style={`--tile-image: url('${tile.asset}'); --tile-accent: ${tile.accent};`}
-        tabindex="0"
-      >
-        <div>
-          <div class="tile-kicker">{tile.label}</div>
-          <h2>{tile.title}</h2>
-          <p>{tile.body}</p>
-        </div>
-        <div class="tile-bottom">
-          <a class="tile-link" href={tile.link} target={tile.link.startsWith('http') ? '_blank' : undefined} rel={tile.link.startsWith('http') ? 'noopener' : undefined}>{tile.id === 'center' ? 'See the flow' : 'Open live proof'}</a>
-          <span class="tile-index">{String(index + 1).padStart(2, '0')}</span>
-        </div>
-      </article>
-    ))}
+<div class="hero-stage" data-proof-stage>
+  <img class="stage-bg" src={sectionAssets.heroAlt} alt="" loading="eager" decoding="async" />
+  <div class="stage-shell">
+    <div class="stage-topline">
+      <span>Proof viewport</span>
+      <small>Swipe or tab through live proof</small>
+    </div>
+    <div class="tile-deck" aria-label="SitesBuilder proof tiles">
+      {proofTiles.map((tile, index) => (
+        <article class={`proof-tile tile-${tile.id}`} data-proof-tile={tile.id} tabindex={index === 1 ? 0 : -1} style={`--tile-accent:${tile.accent}`}>
+          <a href={tile.link} target={tile.link.startsWith('http') ? '_blank' : undefined} rel={tile.link.startsWith('http') ? 'noopener' : undefined} aria-label={`${tile.title}: ${tile.label}`}>
+            <img src={tile.image} alt="" loading={index === 1 ? 'eager' : 'lazy'} decoding="async" />
+            <div class="tile-glass">
+              <span>{tile.label}</span>
+              <h3>{tile.title}</h3>
+              <p>{tile.body}</p>
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+    <div class="stage-controls" aria-label="Mobile proof controls">
+      <button class="step-control" type="button" data-step-prev>Previous</button>
+      <button class="step-control" type="button" data-step-next>Next</button>
+    </div>
   </div>
-  <div class="mobile-step-controls" aria-label="Proof tile controls">
-    <button class="step-control" type="button" data-step-prev aria-label="Previous proof tile">‹</button>
-    <button class="step-control" type="button" data-step-next aria-label="Next proof tile">›</button>
-  </div>
-</section>
+</div>

@@ -1,3 +1,5 @@
+export const siteUrl = 'https://sitesbuilder-full-site.vercel.app';
+
 export const whatsappText = encodeURIComponent('Hi Local Web Works, I want a free SitesBuilder preview. My business is:');
 export const whatsappHref = `https://wa.me/6591616337?text=${whatsappText}`;
 export const mailHref = 'mailto:contact@sitesbuilder.store?subject=SitesBuilder%20free%20preview&body=Hi%20Local%20Web%20Works%2C%0A%0AI%20want%20a%20free%20SitesBuilder%20preview.%0A%0ABusiness%20name%3A%0ACurrent%20website%3A%0AMain%20customer%20action%3A';
@@ -9,47 +11,46 @@ export const navItems = [
   { href: '/contact/', label: 'Contact' }
 ];
 
+export const sectionAssets = {
+  hero: '/assets/bg-hero-1.jpg',
+  heroAlt: '/assets/bg-hero-3.jpg',
+  proof: '/assets/bg-proof-2.jpg',
+  proofAlt: '/assets/bg-proof-3.jpg',
+  process: '/assets/bg-process-1.jpg',
+  processAlt: '/assets/bg-process-3.jpg',
+  conversion: '/assets/bg-conversion-4.jpg',
+  conversionAlt: '/assets/bg-conversion-1.jpg',
+  pricing: '/assets/bg-conversion-3.jpg',
+  contact: '/assets/bg-proof-4.jpg'
+};
+
 export const proofTiles = [
   {
     id: 'left',
     label: 'Eraspace',
     title: 'Retail product discovery',
-    body: 'Heavy ecommerce redesign and product-flow work for Singapore tech retail.',
-    asset: '/assets/proof-eraspace.svg',
-    accent: '#37D7FF',
-    link: 'https://eraspace.sg/'
+    body: 'Ecommerce and product-flow redesign proof. Open the live site.',
+    image: '/assets/eraspace-live-hero.png',
+    link: 'https://eraspace.sg/',
+    accent: '#37D7FF'
   },
   {
     id: 'center',
     label: 'Your preview',
     title: 'First two sections',
     body: 'Hero and first proof section drafted before you commit.',
-    asset: '/assets/proof-preview-flow.svg',
-    accent: '#4D7CFF',
-    link: '/process/#preview-flow'
+    image: '/assets/bg-process-3.jpg',
+    link: '/free-preview/',
+    accent: '#2FE6BF'
   },
   {
     id: 'right',
     label: 'Sarathy',
     title: 'Student finance MVP',
-    body: 'Landing page and app flow shaped in four days for a Singapore university-life finance product.',
-    asset: '/assets/proof-sarathy.svg',
-    accent: '#2FE6BF',
-    link: 'https://sarathyv2-web-production.up.railway.app/'
-  }
-];
-
-
-export const doneSites = [
-  {
-    name: 'Eraspace',
-    url: 'https://eraspace.sg/',
-    label: 'Open Eraspace live site'
-  },
-  {
-    name: 'Sarathy',
-    url: 'https://sarathyv2-web-production.up.railway.app/',
-    label: 'Open Sarathy live site'
+    body: 'Landing page and app flow shaped in four days. Open the live site.',
+    image: '/assets/sarathy-live-hero.png',
+    link: 'https://sarathyv2-web-production.up.railway.app/',
+    accent: '#77F4FF'
   }
 ];
 
@@ -57,32 +58,39 @@ export const packages = [
   {
     name: 'Starter Website',
     price: 'From S$999',
-    body: 'Focused landing page for one clear offer, with the free preview first.',
+    body: 'Focused landing page for one offer, with the free preview first.',
     href: '/free-preview/?package=starter'
   },
   {
     name: 'Business Website',
     price: 'From S$1,499',
-    body: 'Multi-section website with stronger proof, service clarity, and contact flow.',
+    body: 'Multi-section site with proof, pricing clarity, and WhatsApp enquiry flow.',
     href: '/free-preview/?package=business'
   },
   {
     name: 'Custom Build',
     price: 'S$1,999+',
-    body: 'Custom interactions, richer proof systems, and more complex content structure.',
+    body: 'Custom motion, richer proof systems, and more complex content structure.',
     href: '/free-preview/?package=custom'
   }
+];
+
+export const processSteps = [
+  ['Send', 'Business name, current link, and the customer action you want.'],
+  ['Preview', 'Local Web Works drafts the hero and first proof section.'],
+  ['Approve', 'You review the direction before a paid full build starts.'],
+  ['Build', 'The site is finished with pages, pricing, proof, and contact paths.']
 ];
 
 export const routeMeta = {
   home: {
     title: 'SitesBuilder by Local Web Works | Preview first. Build after.',
-    description: 'SitesBuilder drafts the first two landing-page sections before you commit, then Local Web Works finishes the full site after you approve the direction.',
+    description: 'Preview-first websites for local businesses. Local Web Works drafts the first two landing-page sections before you commit.',
     path: '/'
   },
   work: {
     title: 'Work proof | SitesBuilder by Local Web Works',
-    description: 'See proof examples behind SitesBuilder: ecommerce product discovery, MVP landing work, and the preview-first process.',
+    description: 'Live proof examples behind SitesBuilder: ecommerce product discovery, MVP landing work, and the preview-first process.',
     path: '/work/'
   },
   pricing: {

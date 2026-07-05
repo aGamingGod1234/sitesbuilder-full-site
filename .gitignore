@@ -6,5 +6,6 @@ dist/
 .env.*
 !.env.example
 *.zip
+qa/*.png
 .DS_Store
 Thumbs.db
