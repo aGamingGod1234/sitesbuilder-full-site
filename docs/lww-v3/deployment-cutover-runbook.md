@@ -22,6 +22,12 @@ Status: Phase 0 topology verified on 2026-07-12. Preview isolation is establishe
 - Local redesign checkout is linked only to this preview project
 - Build contract: committed `vercel.json` → Astro, `npm run build`, output `dist`
 - Production/custom aliases: none permitted
+- Verified Phase 0 deployment ID: `dpl_VEsussZJeqGouAUwa2wT1QnFmZkD`
+- Immutable deployment URL: `https://sitesbuilder-v3-preview-3f97u83e7-agaminggods-projects.vercel.app`
+- Stable preview alias: `https://sitesbuilder-v3-preview.vercel.app`
+- Deployment status/build: READY; Astro; Node 24.x; `npm run build`; output `dist`
+- Verification: Vercel-authenticated requests returned HTTP 200 for `/`, `/pricing`, `/contact`, `/work`, `/process` and `/free-preview`; deployed HTML contains Local Web Works content
+- Deployment protection: enabled by the Vercel account/team. Anonymous Playwright receives Vercel’s authentication shell, so external browser QA requires an approved bypass configuration or a project-protection change; local browser QA remains authoritative for this Phase 0 baseline
 
 ### Current production
 
@@ -138,7 +144,7 @@ Rollback immediately for inaccessible primary/legal/contact routes, broken payme
 ## Outstanding release blockers
 
 - `main` branch protection is not enabled.
-- The preview deployment and production-project RC have not yet been created from a committed Phase 0 branch.
+- The Phase 0 branch is pushed and its isolated preview deployment is READY; anonymous browser QA is blocked by Vercel deployment protection until an approved bypass/protection setting is available.
 - The exact rollback commands are verified as supported by Vercel CLI 55.0.0 but have not been rehearsed against production; `CUTOVER-001` remains incomplete.
 - Legal/privacy publication fields remain incomplete.
 - Original Sarathy client-permission evidence remains missing.
