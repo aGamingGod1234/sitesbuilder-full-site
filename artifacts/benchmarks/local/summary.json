@@ -1,0 +1,199 @@
+{
+  "releaseId": "local",
+  "generatedAt": "2026-07-12T11:56:46.068Z",
+  "source": "local-dist",
+  "routes": [
+    "/",
+    "/pricing/",
+    "/contact/"
+  ],
+  "profile": {
+    "logLevel": "error",
+    "output": [
+      "json",
+      "html"
+    ],
+    "onlyCategories": [
+      "performance",
+      "accessibility",
+      "best-practices",
+      "seo"
+    ],
+    "formFactor": "mobile",
+    "screenEmulation": {
+      "mobile": true,
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 1,
+      "disabled": false
+    },
+    "throttlingMethod": "simulate",
+    "throttling": {
+      "rttMs": 150,
+      "throughputKbps": 1600,
+      "requestLatencyMs": 562.5,
+      "downloadThroughputKbps": 1474.6,
+      "uploadThroughputKbps": 675,
+      "cpuSlowdownMultiplier": 4
+    }
+  },
+  "versions": {
+    "node": "v24.14.0",
+    "lighthouse": "13.4.0",
+    "browser": "C:\\Users\\lucas\\AppData\\Local\\ms-playwright\\chromium-1228\\chrome-win64\\chrome.exe"
+  },
+  "thresholds": {
+    "lcp": 2500,
+    "cls": 0.05,
+    "tbt": 200
+  },
+  "routeResults": [
+    {
+      "route": "/",
+      "medians": {
+        "lcp": 6155.1224999999995,
+        "cls": 0,
+        "tbt": 5.5
+      },
+      "passed": false
+    },
+    {
+      "route": "/pricing/",
+      "medians": {
+        "lcp": 1578.5179,
+        "cls": 0,
+        "tbt": 0
+      },
+      "passed": true
+    },
+    {
+      "route": "/contact/",
+      "medians": {
+        "lcp": 1353.433,
+        "cls": 0,
+        "tbt": 0
+      },
+      "passed": true
+    }
+  ],
+  "runs": [
+    {
+      "route": "/",
+      "run": 1,
+      "scores": {
+        "performance": 0.77,
+        "accessibility": 0.98,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcp": 6157.1065,
+      "cls": 0,
+      "tbt": 10
+    },
+    {
+      "route": "/",
+      "run": 2,
+      "scores": {
+        "performance": 0.77,
+        "accessibility": 0.98,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcp": 6155.1224999999995,
+      "cls": 0,
+      "tbt": 5.5
+    },
+    {
+      "route": "/",
+      "run": 3,
+      "scores": {
+        "performance": 0.77,
+        "accessibility": 0.98,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcp": 6154.966699999999,
+      "cls": 0,
+      "tbt": 1
+    },
+    {
+      "route": "/pricing/",
+      "run": 1,
+      "scores": {
+        "performance": 1,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcp": 1578.2968,
+      "cls": 0,
+      "tbt": 0
+    },
+    {
+      "route": "/pricing/",
+      "run": 2,
+      "scores": {
+        "performance": 1,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcp": 1578.5179,
+      "cls": 0,
+      "tbt": 0
+    },
+    {
+      "route": "/pricing/",
+      "run": 3,
+      "scores": {
+        "performance": 1,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcp": 1653.3771,
+      "cls": 0,
+      "tbt": 0
+    },
+    {
+      "route": "/contact/",
+      "run": 1,
+      "scores": {
+        "performance": 1,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcp": 1354.0144,
+      "cls": 0,
+      "tbt": 0
+    },
+    {
+      "route": "/contact/",
+      "run": 2,
+      "scores": {
+        "performance": 1,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcp": 1353.2287,
+      "cls": 0,
+      "tbt": 0
+    },
+    {
+      "route": "/contact/",
+      "run": 3,
+      "scores": {
+        "performance": 1,
+        "accessibility": 1,
+        "best-practices": 1,
+        "seo": 1
+      },
+      "lcp": 1353.433,
+      "cls": 0,
+      "tbt": 0
+    }
+  ],
+  "passed": false
+}

@@ -1,0 +1,73 @@
+{
+  "generatedAt": "2026-07-12T11:32:32.608Z",
+  "permissionStatus": {
+    "Eraspace": "internal-owner-attestation",
+    "Sarathy": "lucas-attestation-original-client-record-pending"
+  },
+  "captures": [
+    {
+      "project": "Eraspace",
+      "sourceURL": "https://eraspace.sg/",
+      "capturedAt": "2026-07-12T11:32:26.942Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "thirdPartyContentReview": "pending-human-pixel-review",
+      "records": [
+        {
+          "kind": "primary",
+          "path": "/assets/portfolio-v3/eraspace-primary.webp",
+          "width": 1440,
+          "height": 515,
+          "bytes": 49412,
+          "compression": "WebP quality 82 effort 5",
+          "sha256": "1f78b84c516164b079e9f0ee480c5e6d8a4e5a4173107f860bc41244f0a4b84c",
+          "alt": "Eraspace consumer-electronics storefront hero."
+        },
+        {
+          "kind": "detail",
+          "path": "/assets/portfolio-v3/eraspace-detail.webp",
+          "width": 1440,
+          "height": 463,
+          "bytes": 44384,
+          "compression": "WebP quality 82 effort 5",
+          "sha256": "f6cfef634a85af0ab4c2d682ea9d3c2c91b8d0c40d33d89b706545b08b2a73a9",
+          "alt": "Eraspace product collection discovery section."
+        }
+      ]
+    },
+    {
+      "project": "Sarathy",
+      "sourceURL": "https://sarathyv2-web-production.up.railway.app/",
+      "capturedAt": "2026-07-12T11:32:32.608Z",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "thirdPartyContentReview": "pending-human-pixel-review",
+      "records": [
+        {
+          "kind": "primary",
+          "path": "/assets/portfolio-v3/sarathy-primary.webp",
+          "width": 1440,
+          "height": 900,
+          "bytes": 50906,
+          "compression": "WebP quality 82 effort 5",
+          "sha256": "680fc5248c9074d2c7fdf6be2217532f9b06636524d5925386f0980121f5b3ce",
+          "alt": "Sarathy student-finance MVP landing-page hero."
+        },
+        {
+          "kind": "detail",
+          "path": "/assets/portfolio-v3/sarathy-detail.webp",
+          "width": 1280,
+          "height": 866,
+          "bytes": 44422,
+          "compression": "WebP quality 82 effort 5",
+          "sha256": "1569923fab60e5ec9cfc61ff52f4d35ad5b58d7da049b3818d8eacdc8d839980",
+          "alt": "Sarathy MVP core app features section."
+        }
+      ]
+    }
+  ]
+}

@@ -7,5 +7,8 @@ dist/
 !.env.example
 *.zip
 qa/*.png
+artifacts/qa/local/
+artifacts/benchmarks/*/lighthouse/
+audit-*.json
 .DS_Store
 Thumbs.db

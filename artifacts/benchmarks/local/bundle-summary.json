@@ -1,0 +1,212 @@
+{
+  "generatedAt": "2026-07-12T12:02:26.219Z",
+  "reportOnly": true,
+  "budgets": {
+    "estimatedInitialTransferBytes": 700000
+  },
+  "estimatedInitialTransferBytes": 121344,
+  "totalTransferBytes": 2486589,
+  "failures": [],
+  "files": [
+    {
+      "path": "assets/bg-conversion-1.jpg",
+      "bytes": 62869,
+      "transferBytes": 62869
+    },
+    {
+      "path": "assets/bg-conversion-2.jpg",
+      "bytes": 71511,
+      "transferBytes": 71511
+    },
+    {
+      "path": "assets/bg-conversion-3.jpg",
+      "bytes": 80586,
+      "transferBytes": 80586
+    },
+    {
+      "path": "assets/bg-conversion-4.jpg",
+      "bytes": 59675,
+      "transferBytes": 59675
+    },
+    {
+      "path": "assets/bg-hero-1.jpg",
+      "bytes": 60149,
+      "transferBytes": 60149
+    },
+    {
+      "path": "assets/bg-hero-2.jpg",
+      "bytes": 68044,
+      "transferBytes": 68044
+    },
+    {
+      "path": "assets/bg-hero-3.jpg",
+      "bytes": 88562,
+      "transferBytes": 88562
+    },
+    {
+      "path": "assets/bg-hero-4.jpg",
+      "bytes": 62037,
+      "transferBytes": 62037
+    },
+    {
+      "path": "assets/bg-process-1.jpg",
+      "bytes": 59403,
+      "transferBytes": 59403
+    },
+    {
+      "path": "assets/bg-process-2.jpg",
+      "bytes": 78897,
+      "transferBytes": 78897
+    },
+    {
+      "path": "assets/bg-process-3.jpg",
+      "bytes": 95798,
+      "transferBytes": 95798
+    },
+    {
+      "path": "assets/bg-process-4.jpg",
+      "bytes": 54686,
+      "transferBytes": 54686
+    },
+    {
+      "path": "assets/bg-proof-1.jpg",
+      "bytes": 47089,
+      "transferBytes": 47089
+    },
+    {
+      "path": "assets/bg-proof-2.jpg",
+      "bytes": 66050,
+      "transferBytes": 66050
+    },
+    {
+      "path": "assets/bg-proof-3.jpg",
+      "bytes": 76049,
+      "transferBytes": 76049
+    },
+    {
+      "path": "assets/bg-proof-4.jpg",
+      "bytes": 49113,
+      "transferBytes": 49113
+    },
+    {
+      "path": "assets/eraspace-live-hero.png",
+      "bytes": 318522,
+      "transferBytes": 318522
+    },
+    {
+      "path": "assets/favicon.svg",
+      "bytes": 290,
+      "transferBytes": 230
+    },
+    {
+      "path": "assets/portfolio-v3/eraspace-detail.webp",
+      "bytes": 44384,
+      "transferBytes": 44384
+    },
+    {
+      "path": "assets/portfolio-v3/eraspace-primary.webp",
+      "bytes": 49412,
+      "transferBytes": 49412
+    },
+    {
+      "path": "assets/portfolio-v3/manifest.json",
+      "bytes": 2401,
+      "transferBytes": 801
+    },
+    {
+      "path": "assets/portfolio-v3/sarathy-detail.webp",
+      "bytes": 44422,
+      "transferBytes": 44422
+    },
+    {
+      "path": "assets/portfolio-v3/sarathy-primary.webp",
+      "bytes": 50906,
+      "transferBytes": 50906
+    },
+    {
+      "path": "assets/proof-eraspace.svg",
+      "bytes": 1742,
+      "transferBytes": 669
+    },
+    {
+      "path": "assets/proof-preview-flow.svg",
+      "bytes": 1740,
+      "transferBytes": 671
+    },
+    {
+      "path": "assets/proof-sarathy.svg",
+      "bytes": 1736,
+      "transferBytes": 667
+    },
+    {
+      "path": "assets/sarathy-live-hero.png",
+      "bytes": 300694,
+      "transferBytes": 300694
+    },
+    {
+      "path": "contact/index.html",
+      "bytes": 3903,
+      "transferBytes": 1331
+    },
+    {
+      "path": "free-preview/index.html",
+      "bytes": 4057,
+      "transferBytes": 1394
+    },
+    {
+      "path": "index.html",
+      "bytes": 10747,
+      "transferBytes": 3289
+    },
+    {
+      "path": "llms.txt",
+      "bytes": 393,
+      "transferBytes": 261
+    },
+    {
+      "path": "og-hero-en.png",
+      "bytes": 266477,
+      "transferBytes": 266477
+    },
+    {
+      "path": "og-hero-zh.png",
+      "bytes": 266477,
+      "transferBytes": 266477
+    },
+    {
+      "path": "pricing/index.html",
+      "bytes": 4238,
+      "transferBytes": 1542
+    },
+    {
+      "path": "process/index.html",
+      "bytes": 4160,
+      "transferBytes": 1514
+    },
+    {
+      "path": "robots.txt",
+      "bytes": 76,
+      "transferBytes": 93
+    },
+    {
+      "path": "sitemap.xml",
+      "bytes": 473,
+      "transferBytes": 190
+    },
+    {
+      "path": "work/index.html",
+      "bytes": 4347,
+      "transferBytes": 1573
+    },
+    {
+      "path": "_astro/BaseLayout.astro_astro_type_script_index_0_lang.BPrXBO2t.js",
+      "bytes": 116542,
+      "transferBytes": 45181
+    },
+    {
+      "path": "_astro/BaseLayout.jnMJ3KgK.css",
+      "bytes": 19687,
+      "transferBytes": 5371
+    }
+  ]
+}

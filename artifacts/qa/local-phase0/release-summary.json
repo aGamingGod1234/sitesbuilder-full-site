@@ -1,0 +1,227 @@
+{
+  "releaseId": "local-phase0",
+  "generatedAt": "2026-07-12T12:02:27.185Z",
+  "scope": "automated release IDs; manual IDs remain required by docs/lww-v3/qa-manifest.md",
+  "items": [
+    {
+      "id": "BUILD-001",
+      "status": "pass",
+      "command_or_script": "npm run check",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/check.txt",
+      "approver": "automated",
+      "notes": "Astro/type check evidence"
+    },
+    {
+      "id": "BUILD-002",
+      "status": "pass",
+      "command_or_script": "npm run build",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/build.txt",
+      "approver": "automated",
+      "notes": "Production build evidence"
+    },
+    {
+      "id": "UNIT-001",
+      "status": "pass",
+      "command_or_script": "npm run test:unit",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/unit.txt",
+      "approver": "automated",
+      "notes": "Unit-test evidence"
+    },
+    {
+      "id": "E2E-001",
+      "status": "pass",
+      "command_or_script": "npm run test:e2e",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/playwright-results.json",
+      "approver": "automated",
+      "notes": "36-test browser suite"
+    },
+    {
+      "id": "E2E-002",
+      "status": "fail",
+      "command_or_script": "package-links test",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/playwright/package-links.json",
+      "approver": null,
+      "notes": "Dedicated package/care-link matrix not implemented"
+    },
+    {
+      "id": "E2E-003",
+      "status": "fail",
+      "command_or_script": "keyboard-nav test",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/playwright/keyboard/",
+      "approver": null,
+      "notes": "Dedicated keyboard/focus-order suite not implemented"
+    },
+    {
+      "id": "E2E-004",
+      "status": "fail",
+      "command_or_script": "history-resize test",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/playwright/history-resize/",
+      "approver": null,
+      "notes": "History/orientation state suite not implemented"
+    },
+    {
+      "id": "FALLBACK-001",
+      "status": "pass",
+      "command_or_script": "playwright --project=no-js",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/playwright-results.json",
+      "approver": "automated",
+      "notes": "Basic no-JS route/contact/proof checks"
+    },
+    {
+      "id": "FALLBACK-002",
+      "status": "pass",
+      "command_or_script": "playwright --project=reduced-motion",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/playwright-results.json",
+      "approver": "automated",
+      "notes": "Basic reduced-motion route/contact/proof checks"
+    },
+    {
+      "id": "FALLBACK-003",
+      "status": "fail",
+      "command_or_script": "save-data enhancement test",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/playwright/save-data/",
+      "approver": null,
+      "notes": "Save-Data/failed-enhancement test not implemented"
+    },
+    {
+      "id": "LIFE-001",
+      "status": "fail",
+      "command_or_script": "lifecycle boundary instrumentation",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/lifecycle/boundary.json",
+      "approver": null,
+      "notes": "Renderer lifecycle instrumentation awaits prototype"
+    },
+    {
+      "id": "A11Y-001",
+      "status": "fail",
+      "command_or_script": "axe all public routes",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/playwright-results.json",
+      "approver": null,
+      "notes": "Axe serious/critical checks run, but color-contrast is disabled; full gate not yet met"
+    },
+    {
+      "id": "PERF-001",
+      "status": "fail",
+      "command_or_script": "npm run benchmark:lighthouse",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "benchmarks/local/summary.json",
+      "approver": null,
+      "notes": "Median LCP/CLS/TBT gate"
+    },
+    {
+      "id": "PERF-002",
+      "status": "pass",
+      "command_or_script": "npm run benchmark:bundle",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "benchmarks/local/bundle-summary.json",
+      "approver": "automated",
+      "notes": "Compressed transfer budget"
+    },
+    {
+      "id": "VIS-001",
+      "status": "fail",
+      "command_or_script": "visual suite",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/visual/",
+      "approver": null,
+      "notes": "Visual-diff suite not implemented"
+    },
+    {
+      "id": "SEO-001",
+      "status": "fail",
+      "command_or_script": "SEO route test",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/seo/routes.json",
+      "approver": null,
+      "notes": "Metadata/schema route matrix not implemented"
+    },
+    {
+      "id": "MIGRATE-001",
+      "status": "fail",
+      "command_or_script": "redirect test",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/seo/migration.json",
+      "approver": null,
+      "notes": "Old-to-new redirect test not implemented"
+    },
+    {
+      "id": "LEGAL-001",
+      "status": "pass",
+      "command_or_script": "npm run qa:placeholders",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/legal/placeholder-scan.json",
+      "approver": "automated",
+      "notes": "Built-output placeholder scan"
+    },
+    {
+      "id": "TRUTH-001",
+      "status": "fail",
+      "command_or_script": "content truth scan",
+      "environment": "local Node v24.14.0",
+      "started_at": null,
+      "finished_at": "2026-07-12T12:02:27.185Z",
+      "evidence_path": "qa/local/truth/content.json",
+      "approver": null,
+      "notes": "Production-copy truth matrix not implemented"
+    }
+  ],
+  "totals": {
+    "pass": 8,
+    "fail": 11
+  },
+  "passed": false,
+  "evidencePresent": {
+    "playwright": true,
+    "lighthouse": true,
+    "bundle": true,
+    "placeholders": true
+  }
+}
