@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { siteUrl } from '../data/site';
+const siteUrl = Astro.site!;
 
 const {
   title = 'SitesBuilder by Local Web Works',
@@ -18,7 +18,7 @@ const defaultSchema = {
   '@type': 'ProfessionalService',
   name: 'Local Web Works',
   brand: 'SitesBuilder',
-  url: siteUrl,
+  url: siteUrl.toString(),
   email: 'contact@sitesbuilder.store',
   telephone: '+6591616337',
   areaServed: 'Singapore',
@@ -38,7 +38,7 @@ const defaultSchema = {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={`${siteUrl}/og-hero-en.png`} />
+    <meta property="og:image" content={new URL('/og-hero-en.png', siteUrl).toString()} />
     <meta name="twitter:card" content="summary_large_image" />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(schema || defaultSchema)}></script>
   </head>

@@ -6,6 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 type ViewportMode = 'wide-desktop' | 'portrait-desktop' | 'tablet' | 'mobile-tall' | 'mobile-short';
 
 const root = document.documentElement;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const mobileModes = new Set<ViewportMode>(['mobile-tall', 'mobile-short']);
 let mode: ViewportMode = 'wide-desktop';
 let activeTile = 0;
@@ -13,8 +14,8 @@ let timelineContext: gsap.Context | null = null;
 let resizeTimer = 0;
 
 function getMode(width: number, height: number, aspect: number): ViewportMode {
-  if (width < 640 && height < 680) return 'mobile-short';
-  if (width < 640) return 'mobile-tall';
+  if (width <= 640 && height < 680) return 'mobile-short';
+  if (width <= 640) return 'mobile-tall';
   if (width >= 860 && (aspect < 0.9 || height > width * 1.2)) return 'portrait-desktop';
   if (width < 980) return 'tablet';
   return 'wide-desktop';
@@ -24,7 +25,8 @@ function applyViewportMode() {
   const width = window.innerWidth;
   const height = window.visualViewport?.height || window.innerHeight;
   const aspect = width / Math.max(height, 1);
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reduced = reducedMotion.matches;
+  const motionChanged = root.dataset.reducedMotion !== String(reduced);
   const nextMode = getMode(width, height, aspect);
 
   root.dataset.viewportMode = nextMode;
@@ -36,7 +38,7 @@ function applyViewportMode() {
   const changed = nextMode !== mode;
   mode = nextMode;
   updateMobileTiles();
-  if (changed) rebuildMotion();
+  if (changed || motionChanged) rebuildMotion();
 }
 
 function updateMobileTiles() {
@@ -45,7 +47,6 @@ function updateMobileTiles() {
     const isActive = !mobileModes.has(mode) || index === activeTile;
     tile.classList.toggle('is-active', isActive);
     tile.setAttribute('aria-hidden', isActive ? 'false' : 'true');
-    tile.tabIndex = isActive ? 0 : -1;
     const link = tile.querySelector<HTMLElement>('a, button');
     if (link) link.tabIndex = isActive ? 0 : -1;
   });
@@ -63,10 +64,7 @@ function rebuildMotion() {
 
   const reduced = root.dataset.reducedMotion === 'true';
   const hero = document.querySelector<HTMLElement>('[data-hero]');
-  if (!hero || reduced) {
-    gsap.set('[data-hero-nav], [data-hero-title], [data-hero-copy], [data-hero-action], [data-proof-stage], [data-proof-tile]', { clearProps: 'all' });
-    return;
-  }
+  if (!hero || reduced) return;
 
   timelineContext = gsap.context(() => {
     const opening = gsap.timeline({ defaults: { ease: 'power3.out' } });
@@ -150,6 +148,7 @@ function wireResize() {
     window.clearTimeout(resizeTimer);
     resizeTimer = window.setTimeout(applyViewportMode, 80);
   };
+  reducedMotion.addEventListener('change', applyViewportMode);
   window.addEventListener('resize', schedule, { passive: true });
   window.visualViewport?.addEventListener('resize', schedule, { passive: true });
   new ResizeObserver(schedule).observe(document.body);
@@ -164,6 +163,7 @@ function wireSectionReveals() {
     return;
   }
 
+  root.dataset.motionReady = 'true';
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
@@ -180,4 +180,3 @@ wireHeroCodeReveal();
 wireTileControls();
 wireResize();
 wireSectionReveals();
-rebuildMotion();

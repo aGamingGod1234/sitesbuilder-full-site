@@ -1,5 +1,3 @@
-export const siteUrl = 'https://sitesbuilder-full-site.vercel.app';
-
 export const whatsappText = encodeURIComponent('Hi Local Web Works, I want a free SitesBuilder preview. My business is:');
 export const whatsappHref = `https://wa.me/6591616337?text=${whatsappText}`;
 export const mailHref = 'mailto:contact@sitesbuilder.store?subject=SitesBuilder%20free%20preview&body=Hi%20Local%20Web%20Works%2C%0A%0AI%20want%20a%20free%20SitesBuilder%20preview.%0A%0ABusiness%20name%3A%0ACurrent%20website%3A%0AMain%20customer%20action%3A';

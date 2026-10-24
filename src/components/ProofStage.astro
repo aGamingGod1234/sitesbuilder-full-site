@@ -29,7 +29,7 @@ const cardCode = {
     </div>
     <div class="tile-deck two-card-deck" aria-label="SitesBuilder live proof cards">
       {heroCards.map((tile, index) => (
-        <article class={`proof-tile hero-proof-card tile-${tile.id}`} data-proof-tile={tile.id} tabindex={index === 0 ? 0 : -1} style={`--tile-accent:${tile.accent}`}>
+        <article class={`proof-tile hero-proof-card tile-${tile.id}`} data-proof-tile={tile.id} style={`--tile-accent:${tile.accent}`}>
           <a href={tile.link} target="_blank" rel="noopener" aria-label={`${tile.title}: ${tile.label}`}>
             <pre class="hero-code-layer" aria-hidden="true"><code>{(cardCode[tile.id as 'left' | 'right'] || cardCode.right).join('\n')}</code></pre>
             <div class="hero-tile-media">

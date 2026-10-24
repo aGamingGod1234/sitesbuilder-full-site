@@ -11,9 +11,28 @@ const meta = routeMeta.preview;
       <h1>Get the hero and first proof section drafted first.</h1>
       <p>Send the business name, current link, and the action customers should take. The full website starts only after you approve the direction.</p>
       <div class="hero-actions center-actions">
-        <a class="button-primary" href={whatsappHref} target="_blank" rel="noopener">Send on WhatsApp</a>
-        <a class="button-secondary" href={mailHref}>Email the brief</a>
+        <a class="button-primary" data-preview-contact href={whatsappHref} target="_blank" rel="noopener">Send on WhatsApp</a>
+        <a class="button-secondary" data-preview-contact href={mailHref}>Email the brief</a>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  import { packages } from '../data/site';
+
+  const requested = new URLSearchParams(window.location.search).get('package');
+  const selected = packages.find((pkg) =>
+    new URL(pkg.href, window.location.origin).searchParams.get('package') === requested
+  );
+
+  if (selected) {
+    document.querySelectorAll<HTMLAnchorElement>('[data-preview-contact]').forEach((link) => {
+      const url = new URL(link.href);
+      const field = url.protocol === 'mailto:' ? 'body' : 'text';
+      url.searchParams.set(field, `${url.searchParams.get(field) || ''}\nWebsite package: ${selected.name}`);
+      if (url.protocol === 'mailto:') url.search = url.searchParams.toString().replace(/\+/g, '%20');
+      link.href = url.toString();
+    });
+  }
+</script>
